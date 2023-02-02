@@ -1,6 +1,6 @@
 process simReads {
     input:
-    val ref_file
+    path ref_file
     val depth
     val outdir
 
@@ -8,10 +8,15 @@ process simReads {
     // val outfile
 
     script:
-    genome = ref_file
-    outfile = "${outdir}/reads/${genome}.fastq"
+    genome = ref_file.getSimpleName()
+    outfile = "${outdir}/reads/${genome}_R"
+    println depth
+    println outfile
+    println ref_file
+    
     """
-    printf "$depth\t$ref_file\t$outdir" > $outfile
+    
+    art_illumina -ss HS25 -f ${depth} -p -l 150 -m 200 -s 10 --noALN -i ${ref_file} -o ${outfile}
 
     """
 }
