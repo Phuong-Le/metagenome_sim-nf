@@ -10,9 +10,6 @@ process simReads {
     script:
     genome = ref_file.getSimpleName()
     outfile = "${outdir}/reads/${genome}_R"
-    println depth
-    println outfile
-    println ref_file
     
     """
     
