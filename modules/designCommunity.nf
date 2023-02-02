@@ -1,23 +1,22 @@
-params.outdir = '/outdir/'
-
 process designCommunity {
     // designing community for 1 sample from multiple fasta files
     input: 
-    // file with paths to reference fasta files
-    // path ref_file
-    // val outdir
-    // number of mean genomes
+    val ref_ls_file
     val mean_genomes
+    val depth
+    val outdir
+
 
     output:
-    // tsv file containing fasta file index and corresponding proportion 
-    // path "${outdir}/sample_param.tsv"
+    // tsv file containing fasta file index and their corresponding read depths 
+    val outfile
 
     script:
+    outfile = "$outdir/community_param.tsv"
+    def genomes = file(ref_ls_file)
+    ngenomes = genomes.countLines()
     """
-
-    python3 $projectDir/bin/designCommunity.py -n 10 -m ${mean_genomes}
-
+    designCommunity.py -n ${ngenomes} -m ${mean_genomes} -d ${depth} -o $outdir
     """
    
 }
