@@ -13,10 +13,9 @@ process designCommunity {
 
     script:
     outfile = "$outdir/community_param.tsv"
-    def genomes = file(ref_ls_file)
-    ngenomes = genomes.countLines()
+    
     """
-    designCommunity.py -n ${ngenomes} -m ${mean_genomes} -d ${depth} -o $outdir
+    designCommunity.py --ref_ls_file ${ref_ls_file} -m ${mean_genomes} -d ${depth} -o $outdir
     """
    
 }
