@@ -1,4 +1,4 @@
-#!/usr/bin/env nextflow   
+#!/usr/bin/env nextflow
 
 nextflow.enable.dsl=2
 
@@ -6,14 +6,14 @@ include { designCommunity } from './modules/designCommunity.nf'
 include { simReads } from './modules/simReads.nf'
 
 workflow {
-    out = designCommunity(params.ref_ls_file, params.mean_genomes, params.depth, params.outdir) 
-    genomes = Channel.fromPath('/Users/al35/Documents/nextflow/metagenome_sim/testing/community_param.tsv')
-        .splitText( each:{ it.split()[0] } )
-    depths = Channel.fromPath('/Users/al35/Documents/nextflow/metagenome_sim/testing/community_param.tsv')
-        .splitText( each:{ it.split()[1] } )
+    out = designCommunity(params.ref_ls_file, params.mean_genomes, params.depth, params.outdir)
+    ref_depths_ch = out
+        .splitText(header:false)
+        .map { row -> tuple(file(row[0]), row[1]) }
+        .groupTuple()
 
     reads_dir = file("${params.outdir}/reads")
     reads_dir.mkdir()
-    
-    simReads(genomes, depths, params.outdir)
+
+    simReads(ref_depths_ch, params.outdir)
 }
