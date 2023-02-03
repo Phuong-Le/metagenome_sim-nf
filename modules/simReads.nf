@@ -5,7 +5,8 @@ process simReads {
     path outdir
 
     output:
-    path outdir
+    path "${outfile}1.fq", emit: fq1 
+    path "${outfile}2.fq", emit: fq2
 
     script:
     genome = ref_file.getSimpleName()
