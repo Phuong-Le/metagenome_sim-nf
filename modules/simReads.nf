@@ -1,6 +1,8 @@
 process simReads {
     input:
-    tuple path(ref_file), val(depth)
+    // tuple path(ref_file), val(depth)
+    path ref_file
+    val depth
     path outdir
 
     output:
