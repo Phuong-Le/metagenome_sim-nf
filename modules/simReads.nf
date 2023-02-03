@@ -2,10 +2,10 @@ process simReads {
     input:
     path ref_file
     val depth
-    val outdir
+    path outdir
 
     output:
-    // val outfile
+    path outdir
 
     script:
     genome = ref_file.getSimpleName()
