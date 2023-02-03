@@ -16,7 +16,7 @@ workflow {
     reads_dir = file("${params.outdir}/reads")
     reads_dir.mkdir()
 
-    simReads(genomes, depths, params.outdir)
+    simReads(ref_depths_ch, params.outdir)
     simReads.out.fq1.collectFile(name: "${params.outdir}/all_R1.fq") 
     simReads.out.fq2.collectFile(name: "${params.outdir}/all_R2.fq") 
 }
