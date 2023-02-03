@@ -1,7 +1,7 @@
 process simReads {
     input:
     tuple path(ref_file), val(depth)
-    val outdir
+    path outdir
 
     output:
     path "${outfile}1.fq", emit: fq1 
