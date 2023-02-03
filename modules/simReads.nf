@@ -6,16 +6,16 @@ process simReads {
     path outdir
 
     output:
-    path "${outfile}1.fq", emit: fq1 
-    path "${outfile}2.fq", emit: fq2
+    path "${reads_file}1.fq", emit: fq1 
+    path "${reads_file}2.fq", emit: fq2
 
     script:
     genome = ref_file.getSimpleName()
-    outfile = "${outdir}/reads/${genome}_R"
+    reads_file = "${outdir}/reads/${genome}_R"
 
     """
 
-    art_illumina -ss HS25 -f ${depth} -p -l 150 -m 200 -s 10 --noALN -i ${ref_file} -o ${outfile}
+    art_illumina -ss HS25 -f ${depth} -p -l 150 -m 200 -s 10 --noALN -i ${ref_file} -o ${reads_file}
 
     """
 }

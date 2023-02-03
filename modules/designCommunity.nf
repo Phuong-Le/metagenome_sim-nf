@@ -9,10 +9,10 @@ process designCommunity {
 
     output:
     // tsv file containing fasta file index and their corresponding read depths 
-    path outfile
+    path param_file
 
     script:
-    outfile = "${outdir}/community_param.tsv"
+    param_file = "${outdir}/community_param.tsv"
     """
     designCommunity.py --ref_ls_file ${ref_ls_file} -m ${mean_genomes} -d ${depth} -o ${outdir}
     """
