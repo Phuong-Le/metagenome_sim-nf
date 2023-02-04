@@ -1,8 +1,8 @@
 process simReads {
     input:
-    // tuple path(ref_file), val(depth)
-    path ref_file
-    val depth
+    tuple path(ref_file), val(depth)
+    // path ref_file
+    // val depth
     path outdir
 
     output:
@@ -12,6 +12,7 @@ process simReads {
     script:
     genome = ref_file.getSimpleName()
     reads_file = "${outdir}/reads/${genome}_R"
+    depth = depth[0]
 
     """
 
