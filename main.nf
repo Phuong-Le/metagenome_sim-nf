@@ -10,16 +10,10 @@ workflow {
     ref_depths_ch = param_file
         .splitCsv( sep : '\t')
         .map { row -> tuple(file(row[0]), row[1].toFloat() ) }
-        .groupTuple()
-
-    // ref_files = param_file.splitText(each:{ it.split()[0] } )
-    // depths = param_file.splitText(each:{ it.split()[1] } )
-
 
     reads_dir = file("${params.outdir}/reads")
     reads_dir.mkdir()
 
-    // simReads(ref_files, depths, params.outdir)
     simReads(ref_depths_ch, params.outdir)
     simReads.out.fq1.collectFile(name: "${params.outdir}/metagenome_R1.fq") 
     simReads.out.fq2.collectFile(name: "${params.outdir}/metagenome_R2.fq") 
