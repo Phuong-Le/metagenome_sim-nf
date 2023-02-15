@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import argparse, sys
 
-def get_community(ref_ls_file,mean_genomes,depth,outdir):
+def get_community(ref_ls_file,mean_genomes,depth,outfile):
     ref_ls=pd.read_csv(ref_ls_file, header=None)[0].tolist()
     ngenomes_all = len(ref_ls)
     ngenomes = max(1, np.random.poisson(mean_genomes, size=1)[0])
@@ -17,7 +17,6 @@ def get_community(ref_ls_file,mean_genomes,depth,outdir):
     depths = proportions*depth
 
     out = pd.DataFrame({'genomes': genomes, 'depths': depths})
-    outfile = outdir + '/community_param.tsv'
     out.to_csv(outfile, sep="\t", index=False, header=False)
 
 
@@ -29,12 +28,12 @@ def get_arguments():
                         help='mean number of genomes', type = int)
     parser.add_argument('--depth', '-d', required=True,
                         help='sequencing depth for the whole metagenome sample', type = int)
-    parser.add_argument('--outdir', '-o', required=True,
-                        help='output directory', type = str)
+    parser.add_argument('--outfile', '-o', required=True,
+                        help='output file', type = str)
     return parser
 
 def main(args):
-    get_community(args.ref_ls_file, args.mean_genomes, args.depth, args.outdir)
+    get_community(args.ref_ls_file, args.mean_genomes, args.depth, args.outfile)
 
 
 if __name__ == "__main__":
