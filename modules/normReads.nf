@@ -10,7 +10,7 @@ process normReads {
 
     script:
     """
-    sed '2~4s/-/N/g' ${sim_fq1} > "${genome}_R1.fq"
-    sed '2~4s/-/N/g' ${sim_fq2} > "${genome}_R2.fq"
+    sed -i '2~4s/-/N/g' ${sim_fq1} 
+    sed -i '2~4s/-/N/g' ${sim_fq2} 
     """
 }
