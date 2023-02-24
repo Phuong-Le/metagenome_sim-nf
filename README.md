@@ -1,5 +1,5 @@
-## metagenome_sim-nf - a Nextflow pipeline to simulate metagenomic samples 
-
+## metagenome_sim-nf 
+a Nextflow pipeline to simulate metagenomic samples 
 
 ## Why simulate metagenomes in the first place?
 [Metagenomes](https://en.wikipedia.org/wiki/Metagenomics) are all the genetic materials in a sample. For example, if you have a nasal swab, then its metagenome may contain your DNA but also DNA from the bacteria, viruses and fungi in your nasal swab sample. Metagenomics is often considered superior to traditional microbiological techniques for detecting pathogens as many microbes are not culturable. However, metagenomes are complex, and it is sometimes desirable to have control over what's included in the sample - particularly when it comes to testing metagenomic analytical tools. 
@@ -7,7 +7,14 @@
 I originally wrote this pipeline to help evaluate the accuracy of `kraken2` and `bowtie2` in detecting *Streptococcus pneumoniae*. Firstly, I simulated metagenomic samples that contained just *Streptococcus pneumoniae* - applying `kraken2` and `bowtie2` on these samples helped evaluate the sensitivity of these tools. Secondly, I simulated metagenomic samples that contained other species of *Streptococcus* which are often easily mistaken for *Streptococcus pneumoniae* - applying `kraken2` and `bowtie2` on these samples helped evaluate the specificity of these tools.
 
 
-## How the pipeline works
+## How the pipeline works in details
+The main workflow can be found in [main.nf](https://github.com/Phuong-Le/metagenome_sim-nf/blob/main/main.nf)
+
+1. Designing the community present in the metagenomic sample. That is, what species/strains (reference fasta file) are present and how much do they contribute to the metagenome. The former is sampled from the Poisson distribution, the latter is sampled from the Dirichlet distribution (statistical sampling method by [Gerry Tonkin-Hill](https://github.com/gtonkinhill)). The source code is in [modules/designCommunity.nf](https://github.com/Phuong-Le/metagenome_sim-nf/blob/main/modules/designCommunity.nf), which in turns calls the [bin/designCommunity.py](https://github.com/Phuong-Le/metagenome_sim-nf/blob/main/bin/designCommunity.py) python script.
+
+2. Simulating the metagenomes based on the community structure generated above. This is done using [`art_illumina`](). Currently the pipeline only supports Illumina sequencing. Source code for this step is in [modules/simReads.nf]()
+
+3. Normalising the fastq files output from step 2. `art_illumina` introduces dashes '-' when there's a deletion, [modules/normReads.nf](https://github.com/Phuong-Le/metagenome_sim-nf/blob/main/modules/normReads.nf) for that by replacing the '-' with an N. More thoughts needed regarding whether is is an appropriate fix.
 
 
 
