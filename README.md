@@ -19,7 +19,7 @@ The main workflow can be found in [main.nf](https://github.com/Phuong-Le/metagen
 
 ## Dependencies
 - [Nextflow](https://www.nextflow.io/)
-- [Docker](https://www.docker.com/) if using own machine or [Singularity](https://sylabs.io/singularity/)if using a shared HPC
+- [Docker](https://www.docker.com/) if using own machine or [Singularity](https://sylabs.io/singularity/) if using a shared HPC
 - python3 packages: `numpy`, `pandas`
 - [art](https://www.niehs.nih.gov/research/resources/software/biostatistics/art/index.cfm)
 
@@ -51,7 +51,7 @@ bsub -cwd /path/to/working_dir -o %J.out -e %J.err -R "select[mem>1000] rusage[m
         "nextflow run ${nf_script} -c ${config_file} --mean_genomes ${mean_genomes} --depth ${depth} --outdir ${outdir} --ref_ls_file ${ref_ls_file}"
 ```
 
-demo file for `ref_ls_file` is found in [demo_files](https://github.com/Phuong-Le/metagenome_sim-nf/blob/main/demo_files/ref_ls.txt)
+demo file for `${ref_ls_file}` is found in [demo_files](https://github.com/Phuong-Le/metagenome_sim-nf/blob/main/demo_files/ref_ls.txt)
 
 
 ## Authors 
