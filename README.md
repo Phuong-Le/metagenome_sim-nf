@@ -4,7 +4,7 @@ a Nextflow pipeline to simulate metagenomic samples
 ## Why simulate metagenomes in the first place?
 [Metagenomes](https://en.wikipedia.org/wiki/Metagenomics) are all the genetic materials in a sample. For example, if you have a nasal swab, then its metagenome may contain your DNA but also DNA from the bacteria, viruses and fungi in your nasal swab sample. Metagenomics is often considered superior to traditional microbiological techniques for detecting pathogens as many microbes are not culturable. However, metagenomes are complex, and it is sometimes desirable to have control over what's included in the sample - particularly when it comes to testing metagenomic analytical tools. 
 
-I originally wrote this pipeline to help evaluate the accuracy of `kraken2` and `bowtie2` in detecting *Streptococcus pneumoniae*. Firstly, I simulated metagenomic samples that contained just *Streptococcus pneumoniae* - applying `kraken2` and `bowtie2` on these samples helped evaluate the sensitivity of these tools. Secondly, I simulated metagenomic samples that contained other species of *Streptococcus* which are often easily mistaken for *Streptococcus pneumoniae* - applying `kraken2` and `bowtie2` on these samples helped evaluate the specificity of these tools.
+As an example of how `metagenome_sim-nf` can be used, I originally wrote the piepline to help evaluate the accuracy of `kraken2` and `bowtie2` in detecting *Streptococcus pneumoniae*. Firstly, I simulated metagenomic samples that contained just *Streptococcus pneumoniae* - applying `kraken2` and `bowtie2` on these samples helped evaluate the sensitivity of these tools. Secondly, I simulated metagenomic samples that contained other species of *Streptococcus* which are often easily mistaken for *Streptococcus pneumoniae* - applying `kraken2` and `bowtie2` on these samples helped evaluate the specificity of these tools. Of course, `metagenome_sim-nf` can be used to simulate metagenomes of all kinds of species and not just *Strep* (as long as you have a reference genome). It is not restricted to testing `kraken2` and `bowtie2` either. 
 
 
 ## How the pipeline works in details
@@ -55,7 +55,7 @@ demo file for `${ref_ls_file}` is found in [demo_files](https://github.com/Phuon
 
 
 ## Authors 
-[Phuong Le](https://github.com/Phuong-Le) and [Vicky Carr](https://github.com/blue-moon22)
+[Phuong Le](https://github.com/Phuong-Le) (email: al35@sanger.ac.uk) and [Vicky Carr](https://github.com/blue-moon22)
 
 ## Acknowledgements
 Thanks to [Gerry Tonkin-Hill](https://github.com/gtonkinhill) for sharing his method to design and simulate metagenomes
