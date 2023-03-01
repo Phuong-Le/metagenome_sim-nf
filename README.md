@@ -20,6 +20,8 @@ The main workflow can be found in [main.nf](https://github.com/Phuong-Le/metagen
 ## Dependencies
 - [Nextflow](https://www.nextflow.io/)
 - [Docker](https://www.docker.com/) if using own machine or [Singularity](https://sylabs.io/singularity/) if using a shared HPC
+
+if run without a container (e.g. when `-c lsf.config` is not activated)
 - python3 packages: `numpy`, `pandas`
 - [art](https://www.niehs.nih.gov/research/resources/software/biostatistics/art/index.cfm)
 
