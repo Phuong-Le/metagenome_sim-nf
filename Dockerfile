@@ -5,6 +5,8 @@ WORKDIR /opt
 # install basic dependencies, cleanup apt garbage.
 RUN apt-get update && apt-get install -y -qq \
         python3  \ 
+        python3-pandas \
+        python3-numpy \
         wget \
     && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
