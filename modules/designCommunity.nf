@@ -10,7 +10,7 @@ process designCommunity {
 
     output:
     // tsv file containing fasta file index and their corresponding read depths 
-    path "community_param.tsv"
+    path "community_param.tsv", emit: manifest_ch
 
     script:
     """
