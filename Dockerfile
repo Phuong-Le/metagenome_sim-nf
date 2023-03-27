@@ -8,14 +8,12 @@ RUN apt-get update && apt-get install -y -qq \
         wget \
     && apt-get autoclean && rm -rf /var/lib/apt/lists/*
 
-# install art 
-RUN wget https://www.niehs.nih.gov/research/resources/assets/docs/artbinmountrainier2016.06.05linux64.tgz \
-    && tar -zxvf artbinmountrainier2016.06.05linux64.tgz \
-    && cd art_bin_MountRainier \
-    && mv art_illumina /usr/local/bin \
-    && cd .. \
-    && rm artbinmountrainier2016.06.05linux64.tgz \
-    && rm -r art_bin_MountRainier 
+# install art
+WORKDIR /opt/art
+RUN wget -O - --progress=dot:giga https://www.niehs.nih.gov/research/resources/assets/docs/artbinmountrainier2016.06.05linux64.tgz | \
+    tar -zx --strip-components=2
+
+ENV PATH="/opt/art:${PATH}"
 
 # testing that art_illumina is installed
-# Run art_illumina --help 
+CMD art_illumina --help 
