@@ -5,7 +5,10 @@ include { simReads } from './modules/simReads.nf'
 include { normReads } from './modules/normReads.nf'
 
 workflow {
-    param_file = designCommunity(params.ref_ls_file, params.mean_genomes, params.depth).out.manifest_ch
+    designCommunity(params.ref_ls_file, params.mean_genomes, params.depth)
+
+    param_file = designCommunity.out.manifest_ch
+
     ref_depths_ch = param_file
         .splitCsv( sep : '\t')
         .map { row -> tuple( file(row[0]), row[1].toFloat() ) }
