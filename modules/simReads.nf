@@ -1,15 +1,13 @@
 process simReads {
     input:
-    tuple path(ref_file), val(depth)
-    // path outdir
+    tuple val(sample_id), path(ref_file), val(depth)
 
     output:
-    tuple val(genome), path("${sim_fq_prefix}1.fq"), path("${sim_fq_prefix}2.fq")
+    tuple path("${sim_fq_prefix}1.fq"), path("${sim_fq_prefix}2.fq")
 
     script:
     genome = ref_file.getSimpleName()
-    // reads_file = "${outdir}/reads/${genome}_R"
-    sim_fq_prefix = "${genome}_R"
+    sim_fq_prefix = "${sample_id}-${genome}_R"
 
     """
 

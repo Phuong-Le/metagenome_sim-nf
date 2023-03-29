@@ -2,11 +2,11 @@
 
 process normReads {
     input:
-    tuple val(genome), path(sim_fq1), path(sim_fq2)
+    tuple path(sim_fq1), path(sim_fq2)
 
     output:
-    path "${genome}_R1.fq", emit: fq1
-    path "${genome}_R2.fq", emit: fq2
+    path sim_fq1, emit: fq1
+    path sim_fq2, emit: fq2
 
     script:
     """
