@@ -37,6 +37,7 @@ git clone git@github.com:Phuong-Le/metagenome_sim-nf.git
 ```
 nf_script=/path/to/main.nf
 config_file=/path/to/customed_config/file #eg lsf.config
+sample_size=number of metagenomes to be generated
 mean_genomes=the average number of genomes (species/strains) to be included (the actual number is chosen by Poisson sampling)
 depth=simulated sequencing depth, default to 500
 outdir=/path/to/dir/containing/fastq/files
@@ -44,16 +45,16 @@ ref_ls_file=/path/to/file/containing/genomes/allowed/in/simulated/metagenome
 
 
 nextflow run ${nf_script} -c ${config_file} \
---mean_genomes ${mean_genomes} --depth ${depth} --outdir ${outdir} --ref_ls_file ${ref_ls_file}
+--sample_size ${sample_size} --mean_genomes ${mean_genomes} --depth ${depth} --outdir ${outdir} --ref_ls_file ${ref_ls_file}
 ```
 
-example on an lsf system like at Sanger
+example on an lsf system like at Sanger (note that you could still use raw `nextflow run` like above)
 ```
 module load ISG/singularity/3.10.0
 module load nextflow/22.10.3-5834
 
 bsub -cwd /path/to/working_dir -o %J.out -e %J.err -R "select[mem>1000] rusage[mem=1000]" -M1000 \
-        "nextflow run ${nf_script} -c ${config_file} --mean_genomes ${mean_genomes} --depth ${depth} --outdir ${outdir} --ref_ls_file ${ref_ls_file}"
+        "nextflow run ${nf_script} -c ${config_file} --sample_size ${sample_size} --mean_genomes ${mean_genomes} --depth ${depth} --outdir ${outdir} --ref_ls_file ${ref_ls_file}"
 ```
 
 demo file for `${ref_ls_file}` is found in [demo_files](https://github.com/Phuong-Le/metagenome_sim-nf/blob/main/demo_files/ref_ls.txt)
@@ -66,4 +67,10 @@ demo file for `${ref_ls_file}` is found in [demo_files](https://github.com/Phuon
 Thanks to [Gerry Tonkin-Hill](https://github.com/gtonkinhill) for sharing his method to design and simulate metagenomes
 
 ## Scope for the future
-Currently only 1 metagenome is simulated, so a loop is required to simulate multiple metagenomes. Future work can incorporate this into the pipeline. 
+Could review the designCommunity for more flexibility, and potentially a simulation that's closer to reality 
+
+normReads handling of the '-' character should be reviewed as well
+
+add help message
+
+incorporate nf-test
