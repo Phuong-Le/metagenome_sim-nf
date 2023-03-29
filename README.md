@@ -66,6 +66,8 @@ demo file for `${ref_ls_file}` is found in [demo_files](https://github.com/Phuon
 ## Acknowledgements
 Thanks to [Gerry Tonkin-Hill](https://github.com/gtonkinhill) for sharing his method to design and simulate metagenomes
 
+Thanks to [Harry Hung](https://github.com/HarryHung) for the great Nextflow advice
+
 ## Scope for the future
 Could review the designCommunity for more flexibility, and potentially a simulation that's closer to reality 
 
