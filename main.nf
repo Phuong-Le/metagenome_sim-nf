@@ -2,9 +2,16 @@
 
 import java.nio.file.Paths
 
+// import processes for main workflow
 include { designCommunity } from './modules/designCommunity.nf'
 include { simReads } from './modules/simReads.nf'
 include { normReads } from './modules/normReads.nf'
+
+// import preprocessing function
+include { validate } from './modules/validate.nf'
+
+// validate parameters
+validate(params)
 
 // create directory for the sampples 
 sample_prefix = Paths.get(params.outdir)
